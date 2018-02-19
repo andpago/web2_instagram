@@ -4,7 +4,7 @@ from comment.models import Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    exclude = ('likes', 'likes_count')
 
 
 admin.site.register(Comment, CommentAdmin)
