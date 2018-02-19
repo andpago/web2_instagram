@@ -13,4 +13,5 @@ def save_like(instance: Like, created=False, **kwargs):
 
 @receiver(post_delete, sender=Like)
 def delete_like(instance: Like, **kwargs):
-    instance.object.__class__.objects.filter(pk=instance.object_id).update(likes_count=F('likes_count') - 1)
+    if instance.object is not None:  # for cascade deletion
+        instance.object.__class__.objects.filter(pk=instance.object_id).update(likes_count=F('likes_count') - 1)
