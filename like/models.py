@@ -18,6 +18,12 @@ class Like(AuthoredMixin):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object = GenericForeignKey(ct_field='content_type', fk_field='object_id')
 
+    def __repr__(self):
+        return 'Like<object="{}", id="{}">'.format(repr(self.object), self.id)
+
+    def __str__(self):
+        return repr(self)
+
 
 class LikableMixin(models.Model):
 

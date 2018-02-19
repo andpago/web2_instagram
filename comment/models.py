@@ -16,6 +16,12 @@ class Comment(LikableMixin):
     object = GenericForeignKey(ct_field='content_type', fk_field='object_id')
     text = models.TextField(null=False)
 
+    def __repr__(self):
+        return 'Comment<object="{}", id="{}", text="{}...">'.format(repr(self.object), self.id, self.text[:10])
+
+    def __str__(self):
+        return repr(self)
+
 
 class CommentableMixin(models.Model):
 
