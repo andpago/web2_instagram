@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from like.models import Like
+
+
+class LikeAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Like, LikeAdmin)

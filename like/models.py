@@ -22,6 +22,7 @@ class Like(AuthoredMixin):
 class LikableMixin(models.Model):
 
     likes = GenericRelation(Like)
+    likes_count = models.PositiveIntegerField(default=0)
 
     class Meta:
         abstract = True
