@@ -10,6 +10,8 @@ class EventType:
 
     USER_POST_CREATED = 0
     USER_POST_EDITED = 1
+    USER_SUBSCRIBED = 2
+    USER_UNSUBSCRIBED = 3
 
 
 class Event(models.Model):

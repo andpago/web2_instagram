@@ -6,6 +6,8 @@ from feed.models import Event, EventType
 eventTemplates = {
     EventType.USER_POST_CREATED: 'feed/events/post_created.html',
     EventType.USER_POST_EDITED: 'feed/events/post_edited.html',
+    EventType.USER_SUBSCRIBED: 'feed/events/user_subscribed.html',
+    EventType.USER_UNSUBSCRIBED: 'feed/events/user_unsubscribed.html',
 }
 
 
