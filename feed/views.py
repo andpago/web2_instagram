@@ -13,7 +13,7 @@ def feed(request, start=0, end=10):
     if request.user.is_authenticated:
         context = {'events': {
             event: eventTemplates[event.causeType]
-            for event in Event.objects.filter(author__in=request.user.subscribed_to.all())[start:end]
+            for event in sorted(Event.objects.filter(author__in=request.user.subscribed_to.all())[start:end], key=lambda event: event.created_at, reverse=True)
         }}
         return render(request, 'feed/feed.html', context=context)
     else:
