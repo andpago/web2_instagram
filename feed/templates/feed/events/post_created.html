@@ -1,0 +1,7 @@
+{% extends 'feed/event.html' %}
+
+{% block text %}
+    <p>A new post was created by @{{ event.author.username }}</p>
+    <h3>{{ event.cause.title }}</h3>
+    <p>{{ event.cause.text }}</p>
+{% endblock %}

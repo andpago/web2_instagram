@@ -5,4 +5,11 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    subscribed_to = models.ManyToManyField(to='User', related_name='subscribers')
+
+    def subscribe(self, other):
+        if self != other:
+            self.subscribed_to.add(other)
+
+    def unsubscribe(self, other):
+        self.subscribed_to.remove(other)
