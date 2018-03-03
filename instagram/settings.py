@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'post',
     'comment',
     'feed',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
