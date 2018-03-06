@@ -21,12 +21,14 @@ from rest_framework import routers
 from comment.views import CommentViewSet
 from core.views import UserViewSet
 from feed.views import feed
+from like.views import LikeViewSet
 from post.views import PostViewSet
 
 router = routers.DefaultRouter()
 router.register(r'comments', CommentViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'posts', PostViewSet)
+router.register(r'likes', LikeViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
