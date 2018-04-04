@@ -1,7 +1,10 @@
+import React from "react";
+import ReactDOM from 'react-dom';
+
 const element = React.createElement(
     'div',
     {className: 'greeting'},
-    'HelloWorld!',
+    'Halo Welt!',
 );
 
-ReactDom.render(element, document.getElementById('root'));
+ReactDOM.render(element, document.getElementById('root'));

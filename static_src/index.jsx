@@ -1,3 +1,3 @@
-const React = require('react');
-
-React.render(<App/>, document.getElementById('react-app'));
+// const React = require('react');
+//
+// React.render(<App/>, document.getElementById('react-app'));
