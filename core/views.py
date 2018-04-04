@@ -8,3 +8,7 @@ from core.serializers import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+def index(request):
+    return render(request, 'index.html')

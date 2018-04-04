@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include
-from django.urls import path
+from django.urls import include, re_path, path
 from rest_framework import routers
 
 from comment.views import CommentViewSet
@@ -23,6 +22,7 @@ from core.views import UserViewSet
 from feed.views import feed
 from like.views import LikeViewSet
 from post.views import PostViewSet
+from core.views import index
 
 router = routers.DefaultRouter()
 router.register(r'comments', CommentViewSet)
@@ -33,6 +33,9 @@ router.register(r'likes', LikeViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('feed', feed),
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api', include(router.urls)),
+    path('api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path('', index, name='index_page'),
+    re_path('^.*/?$', index),
 ]
