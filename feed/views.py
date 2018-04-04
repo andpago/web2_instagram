@@ -1,7 +1,9 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
+from rest_framework import viewsets
 
 from feed.models import Event, EventType
+from feed.serializers import EventSerializer
 
 eventTemplates = {
     EventType.USER_POST_CREATED: 'feed/events/post_created.html',
@@ -20,3 +22,8 @@ def feed(request, start=0, end=10):
         return render(request, 'feed/feed.html', context=context)
     else:
         return HttpResponseForbidden("not authenticated")
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer

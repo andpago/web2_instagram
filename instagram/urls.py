@@ -19,7 +19,7 @@ from rest_framework import routers
 
 from comment.views import CommentViewSet
 from core.views import UserViewSet
-from feed.views import feed
+from feed.views import feed, EventViewSet
 from like.views import LikeViewSet
 from post.views import PostViewSet
 from core.views import index
@@ -29,6 +29,7 @@ router.register(r'comments', CommentViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'posts', PostViewSet)
 router.register(r'likes', LikeViewSet)
+router.register(r'events', EventViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -23,3 +23,13 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     causeType = models.IntegerField()
+
+    def __str__(self):
+        typeText = {
+            0: 'post created',
+            1: 'post edited',
+            2: 'user subscribed',
+            3: 'user unsubscribed',
+        }
+
+        return typeText.get(self.causeType, 'unknown event') + ', author_id={}, cause=(type_id={}, obj_id={})'.format(self.author_id, self.content_type, self.cause.id)
