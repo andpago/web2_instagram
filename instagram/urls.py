@@ -33,7 +33,8 @@ router.register(r'likes', LikeViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('feed', feed),
-    path('api', include(router.urls)),
+    path('social/', include('social_django.urls', namespace='social')),
+    path('api/', include(router.urls)),
     path('api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('', index, name='index_page'),

@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <a href="{% url 'social:begin' 'vk-oauth2' %}" class="social-auth__btn social-auth__btn--vk js-ga-btn">Authenticate</a>
         <div id=root></div>
         {% render_bundle 'indexBundle' 'js' %}
         <hr>

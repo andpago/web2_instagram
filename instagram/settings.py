@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'like',
     'post',
+    'social_django',
     'comment',
     'feed',
     'rest_framework',
@@ -151,3 +152,14 @@ WEBPACK_LOADER = {
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = config.get('social', 'vk_oauth2_key')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = config.get('social', 'vk_oauth2_secret')
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
