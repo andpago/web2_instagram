@@ -19,7 +19,12 @@ module.exports = {
 
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new BundleTracker({filename: './webpack-stats.json'})
+        new BundleTracker({filename: './webpack-stats.json'}),
+        new webpack.ProvidePlugin({
+            '$':          'jquery',
+            'React':      'react',
+            'ReactDOM':   'react-dom',
+          })
     ],
 
     module: {
@@ -56,6 +61,7 @@ module.exports = {
 
     devtool: NODE_ENV === 'development' ? 'cheap-inline-module-source-map' : false,
 };
+
 
 
 if (NODE_ENV !== 'development') {
