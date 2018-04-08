@@ -11,6 +11,7 @@ User = get_user_model()
 class Post(LikableMixin, CommentableMixin):
     title = models.CharField(max_length=255)
     text = models.TextField()
+    image = models.ImageField(null=True, upload_to='static/media')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __repr__(self):
@@ -18,3 +19,6 @@ class Post(LikableMixin, CommentableMixin):
 
     def __str__(self):
         return repr(self)
+
+    def get_image_url(self):
+        return self.image.url

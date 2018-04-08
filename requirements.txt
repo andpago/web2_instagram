@@ -3,3 +3,4 @@ psycopg2==2.7.4
 djangorestframework==3.7.7
 django-webpack-loader==0.6.0
 social-auth-app-django
+Pillow==5.1.0

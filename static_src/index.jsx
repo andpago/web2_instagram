@@ -18,14 +18,14 @@ function UnfriendEvent(event) {
 function PostEvent(event) {
     return (<div className="befriendEvent">
         <p>{event.author.username} has posted a photo:</p>
-        <img src={event.cause.imageUrl}/>
+        <img src={event.cause.image}/>
     </div>);
 }
 
 function EditEvent(event) {
     return (<div className="befriendEvent">
         <p>{event.author.username} has edited their post:</p>
-        <img src={event.cause.imageUrl}/>
+        <img src={event.cause.image}/>
     </div>);
 }
 
