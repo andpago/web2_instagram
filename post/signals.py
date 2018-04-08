@@ -10,5 +10,3 @@ def on_save(instance: Post, created=False, **kwargs):
     cause_type = EventType.USER_POST_CREATED if created else EventType.USER_POST_EDITED
     e = Event(cause=instance, author=instance.author, causeType=cause_type)
     e.save()
-
-

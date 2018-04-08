@@ -17,7 +17,7 @@ function UnfriendEvent(event) {
 
 function PostEvent(event) {
     return (<div className="befriendEvent">
-        <p>{event.author.username} has posted a photo:</p>
+        <h3 className="caption">{event.cause.caption}</h3>
         <img src={event.cause.image}/>
     </div>);
 }
