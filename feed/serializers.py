@@ -14,6 +14,7 @@ class EventRelatedField(serializers.RelatedField):
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     cause = EventRelatedField(read_only=True)
+    author = UserSerializer()
 
     class Meta:
         model = Event

@@ -5,27 +5,27 @@ const USER_UNSUBSCRIBED = 3;
 
 function BefriendEvent(event) {
     return (<div className="befriendEvent">
-        <p>{event.friender} has subscribed to {event.friendee}</p>
+        <p>{event.author.username} has subscribed to {event.cause.username}</p>
     </div>);
 }
 
 function UnfriendEvent(event) {
     return (<div className="befriendEvent">
-        <p>{event.unfriender} has unsubscribed from {event.unfriendee}</p>
+        <p>{event.author.username} has unsubscribed from {event.cause.username}</p>
     </div>);
 }
 
 function PostEvent(event) {
     return (<div className="befriendEvent">
-        <p>{event.author} has posted a photo:</p>
-        <img src={event.imageUrl}/>
+        <p>{event.author.username} has posted a photo:</p>
+        <img src={event.cause.imageUrl}/>
     </div>);
 }
 
 function EditEvent(event) {
     return (<div className="befriendEvent">
-        <p>{event.author} has edited their post:</p>
-        <img src={event.imageUrl}/>
+        <p>{event.author.username} has edited their post:</p>
+        <img src={event.cause.imageUrl}/>
     </div>);
 }
 
