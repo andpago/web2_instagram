@@ -1,5 +1,6 @@
 .post-image {
-  width: 100%;
+  max-width: 100%;
+  max-height: 300px;
 }
 
 .user-info > * {
@@ -18,9 +19,13 @@
   vertical-align: middle;
 }
 
-  .event {
-  max-height: 300px;
+.event {
+  height: 300px;
   overflow: hidden;
+  background: #ececec;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .post-text {
