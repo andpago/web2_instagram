@@ -4,6 +4,7 @@ const BundleTracker = require('webpack-bundle-tracker')
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
+    mode: NODE_ENV,
     entry: {
         testBundle: './test',
         indexBundle: './index',
@@ -24,6 +25,9 @@ module.exports = {
             '$':          'jquery',
             'React':      'react',
             'ReactDOM':   'react-dom',
+            'Grid': 'react-flexbox-grid',
+            'Row': 'react-flexbox-grid',
+            'Col': 'react-flexbox-grid',
           })
     ],
 
@@ -35,12 +39,19 @@ module.exports = {
                 loader: 'babel-loader?presets[]=react&presets[]=env&presets[]=stage-1',
             },
             {
+              test: /\.css$/,
+              loader: 'style-loader!css-loader?modules',
+              include: /flexboxgrid/
+            },
+            {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader',
+                exclude: /flexboxgrid/
             },
             {
                 test: /\.scss$/,
                 loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded',
+                exclude: /flexboxgrid/
             },
             {
                 test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,

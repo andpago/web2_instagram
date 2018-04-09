@@ -1,0 +1,40 @@
+.post-image {
+  width: 100%;
+}
+
+.user-info > * {
+  display: inline-block;
+}
+
+.user-info-avatar {
+  height: 48px;
+  width: 48px;
+  vertical-align: middle;
+  background: red;
+  margin-right: 12px;
+}
+
+.user-info-username {
+  vertical-align: middle;
+}
+
+  .event {
+  max-height: 300px;
+  overflow: hidden;
+}
+
+.post-text {
+  margin-top: 0;
+  margin-bottom: 5%;
+  max-height: 55%;
+  overflow-y: scroll;
+  display: block;
+}
+
+.event .user-info {
+  max-height: 20%;
+}
+
+.event .like-comment-buttons {
+  max-height: 20%;
+}
