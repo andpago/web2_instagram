@@ -1,10 +1,23 @@
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import './styles/feed.scss'
+import './styles/feed.scss';
+import UserInfo from './components/UserInfo';
+import CommentBar from './components/CommentBar';
+
 
 const USER_POST_CREATED = 0;
 const USER_POST_EDITED = 1;
 const USER_SUBSCRIBED = 2;
 const USER_UNSUBSCRIBED = 3;
+
+
+function LikeCommentButtons(props) {
+    return (
+        <div className="like-comment-buttons">
+            <button>Like</button>
+            <button>Show comments</button>
+        </div>
+    );
+}
 
 function BefriendEvent(event) {
     return (<div className="befriendEvent">
@@ -18,23 +31,6 @@ function UnfriendEvent(event) {
     </div>);
 }
 
-function UserInfo(props) {
-    return (
-        <div className="user-info">
-            <img src="" className="user-info-avatar"/>
-            <p className="user-info-username">{props.username}</p>
-        </div>
-    );
-}
-
-function LikeCommentButtons(props) {
-    return (
-        <div className="like-comment-buttons">
-            <button>Like</button>
-            <button>Show comments</button>
-        </div>
-    );
-}
 
 function PostEvent(event) {
     // return (<div className="befriendEvent">
@@ -106,7 +102,6 @@ class MakeFeed extends React.Component {
         });
 
         return (<div>
-            <h1>News feed</h1>
             <div className="feed-list">
                 {items}
             </div>
@@ -127,7 +122,7 @@ class Feed extends React.Component {
                         <MakeFeed items={[]}/>
                     </Col>
                     <Col md={3} id="rightCol">
-                        right col
+                        <CommentBar items={[{username: 'anon', text: 'comment text'},{},{}]}/>
                     </Col>
                 </Row>
             </Grid>
