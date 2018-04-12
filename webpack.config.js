@@ -28,6 +28,7 @@ module.exports = {
             'Grid': 'react-flexbox-grid',
             'Row': 'react-flexbox-grid',
             'Col': 'react-flexbox-grid',
+            'Provider': 'react-redux',
           })
     ],
 

@@ -1,4 +1,4 @@
-export default class UserInfo extends React.Component {
+export class UserInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = props;

@@ -2,6 +2,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import './styles/feed.scss';
 import UserInfo from './components/UserInfo';
 import CommentBar from './components/CommentBar';
+import {initStore} from './utils/store.js';
+import {Provider} from "react-redux";
 
 
 const USER_POST_CREATED = 0;
@@ -82,20 +84,6 @@ class MakeFeed extends React.Component {
         this.state = props;
     }
 
-    componentDidMount() {
-        this.loadFeed();
-    }
-
-    loadFeed() {
-        const address = "http://localhost:8000/api/events/?format=json";
-        const self = this;
-
-        $.getJSON( address, function( data ) {
-            self.setState({items: data});
-        });
-
-    }
-
     render() {
         const items = this.state.items.map(function(curr){
             return <FeedEvent event={curr}/>;
@@ -122,7 +110,7 @@ class Feed extends React.Component {
                         <MakeFeed items={[]}/>
                     </Col>
                     <Col md={3} id="rightCol">
-                        <CommentBar items={[{username: 'anon', text: 'comment text'},{},{}]}/>
+                        <CommentBar/>
                     </Col>
                 </Row>
             </Grid>
@@ -131,7 +119,11 @@ class Feed extends React.Component {
 }
 
 
-const app = <Feed text="halo Welt"/>;
+const app = (
+    <Provider store={initStore()}>
+        <Feed text="halo Welt"/>
+    </Provider>
+);
 
 
 ReactDOM.render(app, document.getElementById('root'));

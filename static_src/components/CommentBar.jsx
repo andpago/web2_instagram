@@ -1,6 +1,9 @@
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import '../styles/comment.scss'
-import UserInfo from './UserInfo'
+import { UserInfo } from './UserInfo'
+import { connect } from 'react-redux';
+import {START_LOADING, startLoading, stopLoading} from "../actions/loadingActions";
+import {bindActionCreators} from "redux";
 
 class Comment extends React.Component {
     constructor(props) {
@@ -21,21 +24,43 @@ class Comment extends React.Component {
     }
 }
 
-export default class CommentBar extends React.Component {
+class CommentBar extends React.Component {
+    static defaultProps = {
+        loading: false,
+        text: "default text"
+    };
+
     constructor(props) {
         super(props);
-        this.state = props;
+    }
+
+    componentDidMount() {
+        this.props.startLoading();
+        setTimeout(this.props.stopLoading(), 2000);
     }
 
     render() {
-        const items = this.state.items.map(function(commentData){
-            return <Comment data={commentData}/>;
-        });
+        // const items = this.state.items.map(function(commentData){
+        //     return <Comment data={commentData}/>;
+        // });
 
         return (
             <div id="comment-bar">
-                {items}
+                <p> {this.props.text} </p>
+                {/*{items}*/}
             </div>
         );
     }
 }
+
+const mapStateToProps = (store) => {
+    return {
+        text: store.loadingReducer.text,
+        loading: store.loadingReducer.isLoading,
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({startLoading, stopLoading}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentBar);
