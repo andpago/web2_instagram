@@ -32,11 +32,12 @@ class CommentBar extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(this);
     }
 
     componentDidMount() {
         this.props.startLoading();
-        setTimeout(this.props.stopLoading(), 2000);
+        setTimeout(this.props.stopLoading, 2000);
     }
 
     render() {
@@ -47,6 +48,7 @@ class CommentBar extends React.Component {
         return (
             <div id="comment-bar">
                 <p> {this.props.text} </p>
+                <p> {this.props.loading + ''} </p>
                 {/*{items}*/}
             </div>
         );
@@ -55,8 +57,8 @@ class CommentBar extends React.Component {
 
 const mapStateToProps = (store) => {
     return {
-        text: store.loadingReducer.text,
-        loading: store.loadingReducer.isLoading,
+        text: store.loadingReducer.commentsBar.text,
+        loading: store.loadingReducer.commentsBar.isLoading,
     };
 };
 const mapDispatchToProps = (dispatch) => {
