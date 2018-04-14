@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { loadingReducer } from './loadingReducer';
+import { commentsReducer } from './commentsReducer';
 import { feedReducer } from './feedReducer';
 
 
 export const initReducers = combineReducers({
-    loadingReducer,
+    commentsReducer,
     feedReducer,
-})
+});

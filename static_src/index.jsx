@@ -10,6 +10,7 @@ import { UserInfo } from './components/UserInfo';
 import CommentBar from './components/CommentBar';
 import { initStore } from './utils/store';
 import { fetchData } from './actions/feedActions';
+import { setData } from './actions/commentActions';
 
 
 const USER_POST_CREATED = 0;
@@ -18,14 +19,31 @@ const USER_SUBSCRIBED = 2;
 const USER_UNSUBSCRIBED = 3;
 
 
-function LikeCommentButtons() {
-    return (
-        <div className="like-comment-buttons">
-            <button>Like</button>
-            <button>Show comments</button>
-        </div>
-    );
+class LikeCommentButtons extends React.Component {
+    loadComments() {
+        const address = 'http://localhost:8000/api/posts/' + this.object_id + '/comments/?format=json';
+
+        $.getJSON(address, (data) => {
+            this.props.setData(data);
+        });
+    }
+
+    constructor(props) {
+        super(props);
+        this.object_id = props.object_id;
+    }
+
+    render() {
+        return (
+            <div className="like-comment-buttons">
+                <button>Like</button>
+                <button onClick={ this.loadComments.bind(this) } >Show comments </button>
+            </div>
+        );
+    }
 }
+
+LikeCommentButtons = connect(null, dispatch => bindActionCreators({ setData }, dispatch))(LikeCommentButtons);
 
 function BefriendEvent(event) {
     return (
@@ -53,7 +71,7 @@ function PostEvent(event) {
             <Col md={ 4 }>
                 <UserInfo username={ event.author.username } />
                 <p className="post-text">{event.cause.caption}</p>
-                <LikeCommentButtons />
+                <LikeCommentButtons object_id={ event.object_id }/>
             </Col>
         </Row>
     );
@@ -145,7 +163,6 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchData }, dispatch);
 
 MakeFeed = connect(mapStateToProps, mapDispatchToProps)(MakeFeed);
-
 
 const app = (
     <Provider store={ initStore() }>

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import React from 'react';
 import '../styles/comment.scss';
 import { UserInfo } from './UserInfo';
-import { startLoading, stopLoading } from '../actions/loadingActions';
+import { setData, setBanner } from '../actions/commentActions';
 
 class Comment extends React.Component {
     constructor(props) {
@@ -13,10 +13,11 @@ class Comment extends React.Component {
 
     render() {
         const fish = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+        console.log(this.state.author);
 
         return (
             <div className="comment">
-                <UserInfo username={ this.state.username || 'FIXME' } />
+                <UserInfo username={ this.state.author.username || 'FIXME' } />
                 <p className="comment-text">{this.state.text || fish}</p>
             </div>
         );
@@ -25,31 +26,27 @@ class Comment extends React.Component {
 
 class CommentBar extends React.Component {
     static defaultProps = {
-        loading: false,
-        text: 'default text',
+        bannerShown: true,
+        data: [],
     };
 
-    componentDidMount() {
-        this.props.startLoading();
-        setTimeout(this.props.stopLoading, 2000);
-    }
-
     render() {
+        const items = this.props.data.map(el => <Comment data={ el } />);
+        const content = this.props.bannerShown ? 'banner' : items;
+
         return (
             <div id="comment-bar">
-                <p> {this.props.text} </p>
-                <p> {this.props.loading + ''} </p>
+                { content }
             </div>
         );
     }
 }
 
-const mapStateToProps = (store) => {
-    return {
-        text: store.loadingReducer.commentsBar.text,
-        loading: store.loadingReducer.commentsBar.isLoading,
-    };
-};
-const mapDispatchToProps = dispatch => bindActionCreators({ startLoading, stopLoading }, dispatch);
+const mapStateToProps = (store) => ({
+    data: store.commentsReducer.commentsBar.data,
+    bannerShown: store.commentsReducer.commentsBar.bannerShown,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ setData, setBanner }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentBar);
