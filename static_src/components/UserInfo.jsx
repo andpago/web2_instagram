@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 
 export class UserInfo extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ export class UserInfo extends React.Component {
     render() {
         return (
             <div className="user-info">
-                <img alt="avatar" img src="" className="user-info-avatar" />
+                <img alt="avatar" src="" className="user-info-avatar" />
                 <p className="user-info-username">{this.state.username}</p>
             </div>
         );

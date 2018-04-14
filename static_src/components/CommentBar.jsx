@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { React } from 'react';
+import React from 'react';
 import '../styles/comment.scss';
 import { UserInfo } from './UserInfo';
 import { startLoading, stopLoading } from '../actions/loadingActions';

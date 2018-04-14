@@ -1,9 +1,9 @@
 import { connect, Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { React } from 'react';
-import { ReactDOM } from 'react-dom';
-import { $ } from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
 import './styles/feed.scss';
 import { UserInfo } from './components/UserInfo';
