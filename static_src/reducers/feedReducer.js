@@ -1,10 +1,10 @@
 import update from 'react-addons-update';
-import {FETCH_DATA, fetchData} from "../actions/feedActions";
+import { FETCH_DATA } from '../actions/feedActions';
 
 const initialState = {
     feed: {
         data: [],
-    }
+    },
 };
 
 export function feedReducer(store=initialState, action) {
@@ -12,8 +12,8 @@ export function feedReducer(store=initialState, action) {
         case FETCH_DATA: {
             return update(store, {
                 feed: {
-                    data: {$set: action.data},
-                }
+                    data: { $set: action.data },
+                },
             });
         }
         default:

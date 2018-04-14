@@ -21,15 +21,15 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new BundleTracker({filename: './webpack-stats.json'}),
-        new webpack.ProvidePlugin({
-            '$':          'jquery',
-            'React':      'react',
-            'ReactDOM':   'react-dom',
-            'Grid': 'react-flexbox-grid',
-            'Row': 'react-flexbox-grid',
-            'Col': 'react-flexbox-grid',
-            'Provider': 'react-redux',
-          })
+        // new webpack.ProvidePlugin({
+        //     '$':          'jquery',
+        //     'React':      'react',
+        //     'ReactDOM':   'react-dom',
+        //     'Grid': 'react-flexbox-grid',
+        //     'Row': 'react-flexbox-grid',
+        //     'Col': 'react-flexbox-grid',
+        //     'Provider': 'react-redux',
+        //   })
     ],
 
     module: {
