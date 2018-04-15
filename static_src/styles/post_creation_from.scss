@@ -1,0 +1,43 @@
+.post-creation-form {
+  height: 300px;
+  overflow: hidden;
+  background: #ececec;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.post-creation-form-textarea {
+  height: 80%;
+  width: 100%;
+  resize: none;
+}
+
+.post-creation-form-btn {
+  height: 20%;
+  width: 100%;
+}
+
+
+.post-creation-form-right {
+  height: 100%;
+}
+
+.post-creation-form > div {
+  height: 100%;
+}
+
+.image-loader-btn {
+  width: 100%;
+  height: 100%;
+  font-size: 100pt;
+}
+
+.image-loader {
+  height: 100%;
+}
+
+.image-loader div {
+  height: 100%;
+}
+

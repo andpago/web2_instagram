@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from comment.models import Comment
 from comment.serializers import CommentSerializer
+from base64 import decodebytes
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -24,3 +25,16 @@ class PostViewSet(viewsets.ModelViewSet):
         queryset = Comment.objects.filter(object_id=pk, content_type=ctype)
         serializer = CommentSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
+
+    @action(methods=['post'], detail=False)
+    def new(self, request):
+        data = request.POST
+
+        image = data.get('image', '')
+        text = data.get('text', '')
+
+        with open('/tmp/img.png', 'wb') as O:
+            O.write(decodebytes(bytes(image + '========', encoding='utf-8')))
+            print(decodebytes(bytes(image[22:] + '========', encoding='ascii')))
+
+        return Response('')

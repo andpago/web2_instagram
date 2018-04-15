@@ -12,6 +12,7 @@ import { initStore } from './utils/store';
 import { fetchData } from './actions/feedActions';
 import { setData } from './actions/commentActions';
 import ScrollDetector from './components/ScrollDetector';
+import PostCreationForm from './components/PostCreationForm';
 
 
 const USER_POST_CREATED = 0;
@@ -147,6 +148,7 @@ class Feed extends React.Component {
                         left col
                     </Col>
                     <Col md={ 7 } id="middleCol">
+                        <PostCreationForm/>
                         <MakeFeed items={ [] } />
                     </Col>
                     <Col md={ 3 } id="rightCol">
