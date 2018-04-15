@@ -24,6 +24,14 @@ class Comment extends React.Component {
     }
 }
 
+class Banner extends React.Component {
+    render() {
+        return (
+            <div className="banner"><img alt="banner" src="" className="banner-img" /></div>
+        );
+    }
+}
+
 class CommentBar extends React.Component {
     static defaultProps = {
         bannerShown: true,
@@ -32,7 +40,7 @@ class CommentBar extends React.Component {
 
     render() {
         const items = this.props.data.map(el => <Comment data={ el } />);
-        const content = this.props.bannerShown ? 'banner' : items;
+        const content = this.props.bannerShown ? <Banner /> : items;
 
         return (
             <div id="comment-bar">

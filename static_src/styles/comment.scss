@@ -9,4 +9,14 @@
 #comment-bar {
   position: fixed;
   width: 320px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100%;
+  // FIXME: как сделать плавный переход ?
+}
+
+.banner-img {
+  width: 100%;
+  height: 400px;
+  background: yellow;
 }

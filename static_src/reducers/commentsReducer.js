@@ -1,5 +1,6 @@
 import update from 'react-addons-update';
 import { SET_DATA, SET_BANNER } from '../actions/commentActions';
+import { SCROLL_ACTION } from '../actions/scroll';
 
 const initialState = {
     commentsBar: {
@@ -10,7 +11,7 @@ const initialState = {
 
 export function commentsReducer(store = initialState, action) {
     switch (action.type) {
-        case SET_BANNER: {
+        case SCROLL_ACTION: {
             return update(store, {
                 commentsBar: {
                     bannerShown: { $set: true },

@@ -11,6 +11,7 @@ import CommentBar from './components/CommentBar';
 import { initStore } from './utils/store';
 import { fetchData } from './actions/feedActions';
 import { setData } from './actions/commentActions';
+import ScrollDetector from './components/ScrollDetector';
 
 
 const USER_POST_CREATED = 0;
@@ -152,6 +153,7 @@ class Feed extends React.Component {
                         <CommentBar />
                     </Col>
                 </Row>
+                <ScrollDetector />
             </Grid>
         );
     }
@@ -167,8 +169,7 @@ MakeFeed = connect(mapStateToProps, mapDispatchToProps)(MakeFeed);
 const app = (
     <Provider store={ initStore() }>
         <Feed text="halo Welt" />
-    </Provider>
-);
+    </Provider>);
 
 
 ReactDOM.render(app, document.getElementById('root'));
