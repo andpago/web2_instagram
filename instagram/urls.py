@@ -21,7 +21,7 @@ from comment.views import CommentViewSet
 from core.views import UserViewSet
 from feed.views import feed, EventViewSet
 from like.views import LikeViewSet
-from post.views import PostViewSet
+from post.views import PostViewSet, new_post
 from core.views import index
 
 router = routers.DefaultRouter()
@@ -32,6 +32,7 @@ router.register(r'likes', LikeViewSet)
 router.register(r'events', EventViewSet)
 
 urlpatterns = [
+    path('test/', new_post),
     path('admin/', admin.site.urls),
     path('feed', feed),
     path('social/', include('social_django.urls', namespace='social')),

@@ -1,4 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count, Q, Sum, Case, When, BooleanField
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, serializers
 
 from post.models import Post
@@ -15,6 +18,11 @@ class PostViewSet(viewsets.ModelViewSet):
     author = serializers.ReadOnlyField(source='author.id')
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        queryset = super(PostViewSet, self).get_queryset()
+        queryset = queryset.annotate(does_like=Case(When(likes__author=self.request.user, then=True), default=False, output_field=BooleanField()))
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -38,15 +46,43 @@ class PostViewSet(viewsets.ModelViewSet):
         except:
             return Response({'success': False})
 
+
     @action(methods=['post'], detail=False)
+    @csrf_exempt
     def new(self, request):
         data = request.POST
 
-        image = data.get('image', '')
-        text = data.get('text', '')
+        print(data)
+        print(request.FILES)
 
+        image = request.FILES[0]
+        # text = data.get('text', '')
+        #
         with open('/tmp/img.png', 'wb') as O:
             O.write(decodebytes(bytes(image + '========', encoding='utf-8')))
             print(decodebytes(bytes(image[22:] + '========', encoding='ascii')))
 
-        return Response('')
+        # image = data.get('image', '')
+        # text = data.get('text', '')
+        #
+        # with open('/tmp/img.png', 'wb') as O:
+        #     O.write(decodebytes(bytes(image + '========', encoding='utf-8')))
+        #     print(decodebytes(bytes(image[22:] + '========', encoding='ascii')))
+
+        return Response()
+
+@csrf_exempt
+def new_post(request):
+    data = request.POST
+
+    print(data)
+    print(request.FILES)
+
+    image = request.FILES[0]
+    # text = data.get('text', '')
+    #
+    with open('/tmp/img.png', 'wb') as O:
+        O.write(decodebytes(bytes(image + '========', encoding='utf-8')))
+        print(decodebytes(bytes(image[22:] + '========', encoding='ascii')))
+
+    return HttpResponse('ok')

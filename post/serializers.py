@@ -11,7 +11,11 @@ class DoesLikeField(serializers.Field):
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
+    does_like = serializers.SerializerMethodField()
+
+    def get_does_like(self, obj):
+        return obj.does_like
 
     class Meta:
         model = Post
-        fields = ('author', 'caption', 'created_at', 'image', 'likes_count')
+        fields = ('author', 'caption', 'created_at', 'image', 'likes_count', 'does_like')

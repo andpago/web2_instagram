@@ -19,6 +19,7 @@
   "dependencies": {
     "babel": "^6.23.0",
     "eslint": "^4.19.1",
+    "history": "^4.7.2",
     "jquery": "^3.3.1",
     "minimize": "^2.2.0",
     "react": "^16.3.1",
@@ -26,6 +27,8 @@
     "react-dom": "^16.3.0",
     "react-flexbox-grid": "^2.0.0",
     "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "sass-loader": "^6.0.7",
     "url-loader": "^1.0.1",

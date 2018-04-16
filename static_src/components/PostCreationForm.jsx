@@ -82,7 +82,7 @@ class PostCreationForm extends React.Component {
             >
                 <input name="text" id="hidden-form-text-input" />
                 <input type="file" name="image" id="hidden-form-image-input" />
-                <input name="csrfmiddlewaretoken" value={ getCookie('csrftoken') } />
+                <input name="csrfmiddlewaretoken" readOnly value={ getCookie('csrftoken') } />
             </form>
         );
     }
@@ -92,11 +92,25 @@ class PostCreationForm extends React.Component {
         const url = 'http://localhost:8000/api/posts/new/';
         const cookie = getCookie('csrftoken');
 
-        $('#hidden-form-text-input').text(this.props.text);
-        $('#hidden-form-image-input')[0].files = this.props.image;
-        $('#hidden-form').submit(function(e) {
-            e.preventDefault();
-        });
+        let data = new FormData();
+        data.append('text', this.props.text);
+        data.append('file', this.props.image[0]);
+        data.append('csrfmiddlewaretoken', cookie);
+
+        // console.log(this.props.image);
+        // return;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.onreadystatechange = (res) => {
+            console.log(res);
+        };
+
+        xhr.send(data);
+
+        // $('#hidden-form-text-input').text(this.props.text);
+        // $('#hidden-form-image-input')[0].files = this.props.image;
+        // $('#hidden-form').submit();
     }
 
     render() {

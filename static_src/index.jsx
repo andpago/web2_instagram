@@ -1,6 +1,8 @@
 import { connect, Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -59,7 +61,12 @@ class LikeCommentButtons extends React.Component {
         const colorClass = this.state.doesLike ? 'red' : 'green';
         return (
             <div className="like-comment-buttons">
-                <button className={ colorClass } onClick={ this.toggleLike.bind(this) }>Like ({ this.state.likesCount })</button>
+                <button
+                    className={ colorClass }
+                    onClick={ this.toggleLike.bind(this) }
+                >
+                    Like ({ this.state.likesCount })
+                </button>
                 <button onClick={ this.loadComments.bind(this) } >Show comments </button>
             </div>
         );
@@ -70,9 +77,23 @@ LikeCommentButtons = connect(null, dispatch => bindActionCreators({ setData }, d
 
 function BefriendEvent(event) {
     return (
-        <div className="befriendEvent">
-            <p>{event.author.username} has subscribed to {event.cause.username}</p>
-        </div>
+        <Row className="postEvent">
+            <Col md={ 4 } className="centered">
+                <div>
+                    <img alt="avatar" src="" className="avatar-large" />
+                    <p className="user-info-username">{event.author.username}</p>
+                </div>
+            </Col>
+            <Col md={ 2 } className="centered">
+                =>
+            </Col>
+            <Col md={ 4 } className="centered">
+                <div>
+                    <img alt="avatar" src="" className="avatar-large" />
+                    <p className="user-info-username">{event.cause.username}</p>
+                </div>
+            </Col>
+        </Row>
     );
 }
 
@@ -169,7 +190,7 @@ class Feed extends React.Component {
                         left col
                     </Col>
                     <Col md={ 7 } id="middleCol">
-                        <PostCreationForm/>
+                        <PostCreationForm />
                         <MakeFeed items={ [] } />
                     </Col>
                     <Col md={ 3 } id="rightCol">
@@ -189,9 +210,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({ fetchData }, dispatc
 
 MakeFeed = connect(mapStateToProps, mapDispatchToProps)(MakeFeed);
 
+const history = createHistory();
+
 const app = (
-    <Provider store={ initStore() }>
-        <Feed text="halo Welt" />
+    <Provider store={ initStore([routerMiddleware(history)]) }>
+        <ConnectedRouter history={ history }>
+            <Feed />
+        </ConnectedRouter>
     </Provider>);
 
 
