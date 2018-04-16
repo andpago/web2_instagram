@@ -42,7 +42,7 @@ class ImageLoader extends React.Component {
 const mapDispatchToProps = dispatch => bindActionCreators({ setPostCreationFormImage }, dispatch);
 ImageLoader = connect(null, mapDispatchToProps)(ImageLoader);
 
-function getCookie(name) {
+export function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         let cookies = document.cookie.split(';');

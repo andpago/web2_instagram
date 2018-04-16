@@ -30,5 +30,44 @@ class LikableMixin(models.Model):
     likes = GenericRelation(Like)
     likes_count = models.PositiveIntegerField(default=0)
 
+    def setLike(self, value, author):
+        if value not in (True, False):
+            return False
+
+        try:
+            like = Like.objects.get(object_id=self.id,
+                                    content_type=ContentType.objects.get_for_model(type(self)),
+                                    author=author)
+            if value is False:
+                like.delete()
+                return True
+            else:
+                return False
+        except Like.DoesNotExist:
+            if value is False:
+                return False
+            else:
+                like = Like(object=self, author=author)
+                like.save()
+                return True
+
+    def toggleLike(self, author):
+        likes_count = self.likes_count
+
+        try:
+            like = Like.objects.get(object_id=self.id,
+                                    content_type=ContentType.objects.get_for_model(type(self)),
+                                    author=author)
+            like.delete()
+            likes_count -= 1
+            does_like = False
+        except Like.DoesNotExist:
+            like = Like(object=self, author=author)
+            like.save()
+            likes_count += 1
+            does_like = True
+
+        return likes_count, does_like
+
     class Meta:
         abstract = True

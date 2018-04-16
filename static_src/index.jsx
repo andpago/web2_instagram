@@ -10,9 +10,9 @@ import { UserInfo } from './components/UserInfo';
 import CommentBar from './components/CommentBar';
 import { initStore } from './utils/store';
 import { fetchData } from './actions/feedActions';
-import { setData } from './actions/commentActions';
+import { setData } from './actions/likeCommentActions';
 import ScrollDetector from './components/ScrollDetector';
-import PostCreationForm from './components/PostCreationForm';
+import PostCreationForm, { getCookie } from './components/PostCreationForm';
 
 
 const USER_POST_CREATED = 0;
@@ -23,7 +23,7 @@ const USER_UNSUBSCRIBED = 3;
 
 class LikeCommentButtons extends React.Component {
     loadComments() {
-        const address = 'http://localhost:8000/api/posts/' + this.object_id + '/comments/?format=json';
+        const address = 'http://localhost:8000/api/posts/' + this.props.object_id + '/comments/?format=json';
 
         $.getJSON(address, (data) => {
             this.props.setData(data);
@@ -32,13 +32,34 @@ class LikeCommentButtons extends React.Component {
 
     constructor(props) {
         super(props);
-        this.object_id = props.object_id;
+        this.state = {
+            likesCount: props.object.likes_count,
+            doesLike: false,
+        };
+    }
+
+    toggleLike() {
+        const url = 'http://localhost:8000/api/posts/' + this.props.object_id + '/toggle_like/';
+        const data = {
+            csrfmiddlewaretoken: getCookie('csrftoken'),
+        };
+        const onSuccess = (val) => {
+            console.log(val.likes_count);
+            this.setState({
+                likesCount: val.likes_count,
+                doesLike: val.does_like,
+            });
+        };
+
+
+        $.post(url, data, onSuccess);
     }
 
     render() {
+        const colorClass = this.state.doesLike ? 'red' : 'green';
         return (
             <div className="like-comment-buttons">
-                <button>Like</button>
+                <button className={ colorClass } onClick={ this.toggleLike.bind(this) }>Like ({ this.state.likesCount })</button>
                 <button onClick={ this.loadComments.bind(this) } >Show comments </button>
             </div>
         );
@@ -73,7 +94,7 @@ function PostEvent(event) {
             <Col md={ 4 }>
                 <UserInfo username={ event.author.username } />
                 <p className="post-text">{event.cause.caption}</p>
-                <LikeCommentButtons object_id={ event.object_id }/>
+                <LikeCommentButtons object={ event.cause } object_id={ event.object_id } />
             </Col>
         </Row>
     );

@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import { SET_DATA, SET_BANNER } from '../actions/commentActions';
+import { SET_DATA, SET_BANNER } from '../actions/likeCommentActions';
 import { SCROLL_ACTION } from '../actions/scroll';
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
     },
 };
 
-export function commentsReducer(store = initialState, action) {
+export function commentsBarReducer(store = initialState, action) {
     switch (action.type) {
         case SCROLL_ACTION: {
             return update(store, {

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import React from 'react';
 import '../styles/comment.scss';
 import { UserInfo } from './UserInfo';
-import { setData, setBanner } from '../actions/commentActions';
+import { setData, setBanner } from '../actions/likeCommentActions';
 
 class Comment extends React.Component {
     constructor(props) {

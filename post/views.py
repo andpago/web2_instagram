@@ -26,6 +26,18 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = CommentSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
 
+    @action(methods=['post'], detail=True)
+    def toggle_like(self, request, pk):
+        try:
+            post = Post.objects.get(pk=pk)
+            likes_count, does_like = post.toggleLike(author=request.user)
+            return Response({
+                'likes_count': likes_count,
+                'does_like': does_like,
+            })
+        except:
+            return Response({'success': False})
+
     @action(methods=['post'], detail=False)
     def new(self, request):
         data = request.POST
