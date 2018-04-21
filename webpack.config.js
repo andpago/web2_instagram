@@ -5,9 +5,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
     entry: {
-        testBundle: './test',
         indexBundle: './index',
-        // testRedux: './testRedux',
     },
     context: `${__dirname}/static_src`,
     output: {
