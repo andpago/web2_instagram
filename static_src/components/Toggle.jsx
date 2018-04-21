@@ -1,10 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleOff, toggleOn } from '../actions/ToggleActions';
 import '../styles/ToggleStyles.scss';
 
 class Toggle extends React.Component {
+    propTypes = {
+        isOn: PropTypes.bool.isRequired,
+        toggleOn: PropTypes.func,
+        toggleOff: PropTypes.func,
+    };
+
+    defaultProps = {
+        isOn: false,
+    };
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
