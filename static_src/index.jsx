@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+import Toggle from './components/Toggle';
+import { initStore } from './utils/store';
+
+const store = initStore([]);
 
 function App() {
     return (
-        <div id="app">
-            app
-        </div>
+        <Provider store={ store }>
+            <div id="app">
+                <Toggle />
+            </div>
+        </Provider>
     );
 }
 
